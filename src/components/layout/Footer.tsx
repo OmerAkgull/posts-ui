@@ -101,10 +101,6 @@ export default function Footer() {
               Law Enforcement
             </Box>
           </Stack>
-
-          <Stack align={'flex-start'}>
-            <ListHeader>Install App</ListHeader>
-          </Stack>
         </SimpleGrid>
       </Container>
 
