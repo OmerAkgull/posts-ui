@@ -6,7 +6,9 @@ import Layout from "./routes/layout";
 import Users from "./routes/users";
 import { loader as userLoader } from "./routes/users";
 import UserDetails from "./routes/UserDetails";
+import Post from "./routes/post";
 import { loader as singleUserLoader } from "./routes/UserDetails";
+import { loader as postLoader } from "./routes/post";
 
 const router = createBrowserRouter([
   {
@@ -15,23 +17,28 @@ const router = createBrowserRouter([
     children: [
       {
         path: "users",
+        index: true,
         element: <Users></Users>,
         loader: userLoader,
       },
       {
         path: "users/:userId",
-        element: <UserDetails/>,
+        element: <UserDetails />,
         loader: singleUserLoader,
-      }
-    ]
+      },
+      {
+        path: "users/:userId/posts/:postId",
+        element: <Post />,
+        loader: postLoader,
+      },
+    ],
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider>
-    <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router}></RouterProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

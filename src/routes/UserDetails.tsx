@@ -11,7 +11,7 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { Params } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 interface User {
   id: number;
   name: string;
@@ -175,7 +175,7 @@ export default function UserDetails() {
           {posts.map((post) => {
             if (post.userId === user.id)
               return (
-                <Card my={5}>
+                <Card key={post.id} as={Link} to={`posts/${post.id}`} my={5}>
                   <CardHeader fontWeight="medium">{post.title}</CardHeader>
                   <CardBody>
                     <Text>{post.body}</Text>
@@ -195,18 +195,16 @@ export default function UserDetails() {
             Albums
           </Center>
           <Grid pb={10} templateColumns="repeat(5, 1fr)" gap={5}>
-
-          {albums.map((album) => {
-            if (album.userId === user.id)
-              return (
-                <Card my={5}>
-                  <CardHeader fontWeight="medium">{album.title}</CardHeader>
-                  <CardBody>
-                  </CardBody>
-                </Card>
-              );
-          })}
-                          </Grid>
+            {albums.map((album) => {
+              if (album.userId === user.id)
+                return (
+                  <Card key={album.id} my={5}>
+                    <CardHeader fontWeight="medium">{album.title}</CardHeader>
+                    <CardBody></CardBody>
+                  </Card>
+                );
+            })}
+          </Grid>
         </TabPanel>
         <TabPanel>
           <Center
@@ -221,7 +219,7 @@ export default function UserDetails() {
           {todos.map((todo) => {
             if (todo.userId === user.id)
               return (
-                <Card my={5}>
+                <Card key={todo.id} my={5}>
                   <CardHeader fontWeight="medium">{todo.title}</CardHeader>
                   <CardBody>
                     <Text>Completed? {JSON.stringify(todo.completed)}</Text>
