@@ -14,6 +14,8 @@ import {
     Stack,
   } from '@chakra-ui/react'
   import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+  import { Link as RouterLink } from 'react-router-dom';
+
   
   interface Props {
     children: React.ReactNode
@@ -25,18 +27,17 @@ import {
     const { children } = props
   
     return (
-      <Box
-        as="a"
-        px={2}
-        py={1}
-        rounded={'md'}
-        _hover={{
-          textDecoration: 'none',
-          bg: useColorModeValue('gray.200', 'gray.700'),
-        }}
-        href={'#'}>
-        {children}
-      </Box>
+<RouterLink
+      to={`/${children}`}
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: useColorModeValue('gray.200', 'gray.700'),
+      }}>
+      {children}
+    </RouterLink>
     )
   }
   
@@ -55,7 +56,7 @@ import {
               onClick={isOpen ? onClose : onOpen}
             />
             <HStack spacing={8} alignItems={'center'}>
-              <Box>Posts - UI</Box>
+              <Box as='a' href='/'>Posts - UI</Box>
               <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                 {Links.map((link) => (
                   <NavLink key={link}>{link}</NavLink>
