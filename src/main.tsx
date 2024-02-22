@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "./routes/layout";
-import Homepage from "./routes/homepage";
-import { loader as userLoader } from "./routes/homepage";
+import Users from "./routes/users";
+import { loader as userLoader } from "./routes/users";
+import UserDetails from "./routes/UserDetails";
+import { loader as singleUserLoader } from "./routes/UserDetails";
 
 const router = createBrowserRouter([
   {
@@ -12,10 +14,17 @@ const router = createBrowserRouter([
     element: <Layout></Layout>,
     children: [
       {
-        index:true,
-        element: <Homepage></Homepage>,
+        path: "users",
+        element: <Users></Users>,
         loader: userLoader,
-      }
+        children: [
+          {
+            path: ":userId",
+            element: <UserDetails/>,
+            loader: singleUserLoader,
+          }
+        ]
+      },
     ]
   },
 ]);
