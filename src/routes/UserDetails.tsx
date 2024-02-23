@@ -198,7 +198,7 @@ export default function UserDetails() {
             {albums.map((album) => {
               if (album.userId === user.id)
                 return (
-                  <Card key={album.id} my={5}>
+                  <Card key={album.id} my={5} as={Link} to={`albums/${album.id}`}>
                     <CardHeader fontWeight="medium">{album.title}</CardHeader>
                     <CardBody></CardBody>
                   </Card>

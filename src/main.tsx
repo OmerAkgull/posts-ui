@@ -9,6 +9,9 @@ import UserDetails from "./routes/UserDetails";
 import Post from "./routes/post";
 import { loader as singleUserLoader } from "./routes/UserDetails";
 import { loader as postLoader } from "./routes/post";
+import Album from "./routes/album";
+import { loader as albumLoader } from "./routes/album";
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,11 @@ const router = createBrowserRouter([
         element: <Post />,
         loader: postLoader,
       },
+      {
+        path: "users/:userId/albums/:albumId",
+        element: <Album/>,
+        loader: albumLoader,
+      }
     ],
   },
 ]);
