@@ -8,8 +8,12 @@ import {
   Center,
   Image,
   Container,
+  IconButton
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 
 interface Photo {
   albumId: number;
@@ -68,7 +72,18 @@ const Album = () => {
       <Container>
         {photos && photos.length > 0 ? (
           photos.map((photo) => (
-            <Image key={photo.id} src={photo.url} alt={photo.title} my={3} />
+            <Container key={photo.id} my={3} position="relative">
+              <Image src={photo.url} alt={photo.title} />
+              <IconButton 
+                icon={<FontAwesomeIcon icon={faHeart} />}
+                aria-label="Like"
+                position="absolute"
+                top="90%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+                colorScheme="red"
+              />
+            </Container>
           ))
         ) : (
           <Text>No photos available</Text>
