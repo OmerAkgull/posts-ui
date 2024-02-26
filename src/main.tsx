@@ -11,6 +11,7 @@ import { loader as singleUserLoader } from "./routes/UserDetails";
 import { loader as postLoader } from "./routes/post";
 import Album from "./routes/album";
 import { loader as albumLoader } from "./routes/album";
+import Favorites from "./routes/favorites";
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         path: "users/:userId/albums/:albumId",
         element: <Album/>,
         loader: albumLoader,
+      },
+      {
+        path:"favorites",
+        element: <Favorites></Favorites>
       }
     ],
   },

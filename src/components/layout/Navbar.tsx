@@ -22,7 +22,7 @@ import {
     children: React.ReactNode
   }
   
-  const Links = ['Users']
+  const Links = ['Users', 'Favorites']
   
   const NavLink = (props: Props) => {
     const { children } = props
@@ -64,7 +64,7 @@ import {
                 {Links.map((link) => (
                   <NavLink key={link}>{link}</NavLink>
                 ))}
-                <Text> Favorites: {favorites.length}</Text>
+                <Text> Favorite Count: {favorites.length}</Text>
               </HStack>
             </HStack>
             <Flex alignItems={'center'}>
