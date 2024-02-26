@@ -12,16 +12,17 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
+    Text
   } from '@chakra-ui/react'
   import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
   import { Link as RouterLink } from 'react-router-dom';
-
+  import { useFavoriteStore } from '../../stores/favorites-store';
   
   interface Props {
     children: React.ReactNode
   }
   
-  const Links = ['Users', 'Posts']
+  const Links = ['Users']
   
   const NavLink = (props: Props) => {
     const { children } = props
@@ -43,6 +44,8 @@ import {
   
   export default function NavBar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const {favorites, addToFavorites, removeFavorites} = useFavoriteStore();
   
     return (
       <>
@@ -61,6 +64,7 @@ import {
                 {Links.map((link) => (
                   <NavLink key={link}>{link}</NavLink>
                 ))}
+                <Text> Favorites: {favorites.length}</Text>
               </HStack>
             </HStack>
             <Flex alignItems={'center'}>

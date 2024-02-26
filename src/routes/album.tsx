@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useFavoriteStore } from "../stores/favorites-store";
 
 
 interface Photo {
@@ -51,6 +52,8 @@ const Album = () => {
   const { user } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
   const { photos } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
+  const {favorites, addToFavorites, removeFavorites} = useFavoriteStore();
+
   return (
     <>
       <Center
@@ -81,7 +84,14 @@ const Album = () => {
                 top="90%"
                 left="50%"
                 transform="translate(-50%, -50%)"
-                colorScheme="red"
+                colorScheme={favorites.includes(photo.id) ? "red" : "white"}
+                onClick={() => {
+                  if (favorites.includes(photo.id)) {
+                    removeFavorites(photo.id); 
+                  } else {
+                    addToFavorites(photo.id);
+                  }
+                }}
               />
             </Container>
           ))
