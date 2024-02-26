@@ -1,12 +1,15 @@
-import { Center } from "@chakra-ui/react";
+import { Center, IconButton } from "@chakra-ui/react";
 import { useFavoriteStore } from "../stores/favorites-store"
 import { Photo } from "./album";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Favorites = () => {
      const [favoritePhotos, setFavoritePhotos] = useState([]);
 
-const { favorites } = useFavoriteStore();
+const { favorites, removeFavorites } = useFavoriteStore();
 
 
 useEffect(() => {
@@ -22,17 +25,25 @@ useEffect(() => {
 
   return (
     <div>
-      <Center>Your Favorite Photos</Center>
-      {favoritePhotos.length > 0 ? (
-        favoritePhotos.map((photo: Photo) => (
-          <Center key={photo.id}>
+    <Center>Your Favorite Photos</Center>
+    {favoritePhotos.length > 0 ? (
+      favoritePhotos.map((photo: Photo) => (
+        <Center key={photo.id}>
+          <Link to={`/users/:userId/albums/${photo.albumId}`}>
             <img src={photo.url} alt={photo.title} />
-          </Center>
-        ))
-      ) : (
-        <Center>No favorite photos yet!</Center>
-      )}
-    </div>
+          </Link>
+          <IconButton
+            icon={<FontAwesomeIcon icon={faHeart} />}
+            aria-label="Remove from Favorites"
+            colorScheme="red"
+            onClick={() => removeFavorites(photo.id)}
+          />
+        </Center>
+      ))
+    ) : (
+      <Center>No favorite photos yet!</Center>
+    )}
+  </div>
   );
 };
 
